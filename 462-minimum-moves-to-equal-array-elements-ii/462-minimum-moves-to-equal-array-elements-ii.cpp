@@ -8,10 +8,7 @@ public:
       
       for(int i=0; i<n; i++)
       {
-        if(i!=midIndex)
-        {
-          moves+=abs(nums[midIndex]-nums[i]);
-        }
+        moves+=abs(nums[midIndex]-nums[i]);
       }
       return moves;
     }
