@@ -1,29 +1,21 @@
-class Solution {
-public:
-    static bool sortBySec(const vector<int>& v1, const vector<int>& v2)
+class Solution
+{
+ public:
+  int maximumUnits(vector<vector<int>>& boxTypes, int truckSize)
+  {
+    //sorting in decreasing order of highest units per box, i.e., 2nd value
+    sort(boxTypes.begin(), boxTypes.end(), [](auto& v1, auto& v2) {
+      return v1[1] > v2[1];
+    });
+    int maxUnits = 0;
+    for(auto& box: boxTypes)
     {
-      if(v1[1]>v2[1])
-        return true;
-      return false;
+      int numBoxes = min(truckSize, box[0]);
+      maxUnits += numBoxes*box[1];
+      truckSize-=numBoxes;
+      if(truckSize == 0)
+        break;
     }
-    int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) {
-      sort(boxTypes.begin(),boxTypes.end(),sortBySec);
-      int ans = 0;
-      for(auto &x:boxTypes)
-      {
-        if(truckSize==0)
-          break;
-        else if(truckSize<=x[0])
-        {
-          ans+=truckSize*x[1];
-          truckSize = 0;
-        }
-        else
-        {
-          ans+=x[0]*x[1];
-          truckSize-=x[0];
-        }
-      }
-      return ans;
-    }
+    return maxUnits;
+  }
 };
