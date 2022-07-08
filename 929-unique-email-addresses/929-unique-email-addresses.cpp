@@ -1,7 +1,7 @@
 class Solution {
 public:
     int numUniqueEmails(vector<string>& emails) {
-      set<string> mailset;
+      unordered_set<string> mailset;
       for(auto email : emails)
       {
         string newEmail = "";
